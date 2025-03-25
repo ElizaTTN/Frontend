@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Игра Мемори</title>
+  <script src="vendor/react.development.js"></script>
+  <script src="vendor/react-dom.development.js"></script>
+  <script src="vendor/babel.min.js"></script>
+  <script src="data.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="root">Корневой элемент</div>
+  <script type="text/babel">
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+    root.render(<App images={images} visibleItems={visibleItems} finishedItems={finishedItems}/>)
+
+    function App({images =[], visibleItems=[], finishedItems=[]}) {
+      const cards = images.map((item) => (
+        <CreateCard 
+          key = {item.id}
+          url = {item.url}
+          isSelected={visibleItems.includes(item.id)}
+          isFinished={finishedItems.includes(item.id)}
+          />
+      ));
+  return (
+    <section class="game container">
+    <ul class="cards cards-theme-cars">
+     {cards}
+    </ul>
+  </section>
+  );
+  }
+  function CreateCard ({url, isSelected = false, isFinished = true}) {
+    const content = <img src = {url} width = "185" height="100" alt=""/>
+    const className = `card ${isSelected ? 'card-show' : ''} ${isFinished ? 'card-finished' : ''}`; 
+    return (
+      <li className={className}>
+        {content}
+      </li>
+    )
+  }
+  </script>
+</body>
+</html>
