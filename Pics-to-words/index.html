@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Pics to words. Игра для изучения иностранных языков</title>
+  <script src="vendor/react.development.js"></script>
+  <script src="vendor/react-dom.development.js"></script>
+  <script src="vendor/babel.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="data.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+    root.render(<App words={words} selectedItems={selectedItems} finishedItems={finishedItems}/>);
+
+    function App({words = [], selectedItems = [], finishedItems = []}) {
+      return (
+        <section className="game">
+          <Grid words={words} selectedItems={selectedItems} finishedItems={finishedItems}/>
+        </section>
+      );
+    }
+
+    function Grid({words, selectedItems, finishedItems}) {
+      const cards = words.map((item) => (
+        <Card
+          key={item.id}
+          type={item.type}
+          url={item.url}
+          text={item.word}
+          isSelected={selectedItems.includes(item.id)}
+          isFinished={finishedItems.includes(item.id)}
+        />
+      ));
+      return (
+        <ul className="cards">
+          {cards}
+        </ul>
+      );
+    }
+
+    function Card({url, text, type, isSelected = false, isFinished = false}) {
+  const content = type === 'image'
+    ? <img src={url} width="185" height="100" alt=""/>
+    : <span>{text}</span>;
+
+  const className = `card ${isSelected ? '-selected' : ''} ${isFinished ? '-disabled' : ''}`;
+  
+  return (
+    <li className={className}>
+      {content}
+    </li>
+  );
+}
+  </script>
+</body>
+</html>
