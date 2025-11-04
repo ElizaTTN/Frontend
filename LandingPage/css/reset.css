@@ -1,0 +1,36 @@
+/* Reset.css */
+html, body, div, span,
+h1, h4, h5, h6, p,
+a, img, ol, ul, li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+button {
+    border-width: 0;
+    border-style: none;
+}
+
+dl,dd,dt{
+    padding: 0px;
+    margin: 0px;
+}
+h2,h3 {
+    margin : 0;
+}
+
+input [ type="radio" ]{
+    block-size: 0px;
+}
